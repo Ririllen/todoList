@@ -1,0 +1,22 @@
+.item {
+    /* min-width: 270px;  */
+    width: 470px;
+    border-radius: 1rem;
+    border-left: 0.5rem solid yellow; /* #167D7F; */
+    margin: 1rem;
+    padding: 0.75rem;
+    background-color: #98D7C2;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.icon {
+  cursor: pointer;
+}
