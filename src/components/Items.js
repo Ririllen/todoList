@@ -2,8 +2,8 @@ import Item from "./Item";
 
 
 export default function Items({todos}) {
-
+    console.log(todos);
     return ( <>
-        {todos.map( todo => <Item key={todo.id} id = {todo.id} content={todo.todo} />)}
+        {todos.map( todo => <Item key={todo.id} id = {todo.id} content={todo.todo} completed={todo.completed}/>)}
             </>);
 }

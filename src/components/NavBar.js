@@ -1,11 +1,14 @@
+import { useEffect } from 'react';
 import styles from 'src/app/page.module.css';
-// import useTodos from './hooks/useTodos'
 import { useTodosContext } from 'src/hooks/useTodosContext';
 
-export default function NavBar() {
-
-    const {setNavState} = useTodosContext();
+export default function NavBar({firstTodos}) {
+  const { setTodos, setNavState} = useTodosContext();
   
+  useEffect(() => 
+    setTodos(firstTodos)
+  ,[firstTodos]);
+
     const handleOnClickViewAll = () => {
       setNavState('ALL');
     }
@@ -22,11 +25,12 @@ export default function NavBar() {
       setNavState('NEW');
     }
   
-    // return (<div className={styles.nav}>
-    return (<>
+    return (
+            <div className={styles.nav}>
                 <div onClick={handleOnClickViewAll}>VIEW ALL</div>
                 <div onClick={handleOnClickCompleted}>COMPLETED</div>
                 <div onClick={handleOnClickOngoing}>ONGOING</div>
                 <div onClick={handleOnClickPlus}>+</div>
-            </>);
+            </div>
+            );
 }

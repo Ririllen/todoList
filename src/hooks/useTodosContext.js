@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import useTodos from "./useTodos";
+// import useTodos from "./useTodos";
 
 export const TodosContext = createContext();
 
@@ -10,13 +10,14 @@ export function TodosProvider(props) {
   
     const [navState, setNavState] = useState('');
     const [itemState, setItemState] = useState('');
+    const [todos, setTodos] = useState([]);
 
-    const todos = useTodos();
-  
+        
     return (
       <TodosContext.Provider
         value={{
           todos , 
+          setTodos,
           navState,
           setNavState,
           itemState, 
