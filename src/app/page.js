@@ -17,8 +17,8 @@ export default function Home() {
         <div className={styles.container}>
           <h1 className={styles.h1}>To Do List</h1>
           <TodosProvider>
-            <NavBar firstTodos={todos}/>
-            <TodoList/> 
+            <NavBar />
+            <TodoList firstTodos={todos}/> 
           </TodosProvider>
         </div>  
       </main>

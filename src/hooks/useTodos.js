@@ -8,7 +8,9 @@ export default function useTodos() {
             const todosList = await fetch('https://dummyjson.com/todos')
                             .then(res => res.json());
     
-            setFirstTodos(todosList.todos);
+            const todos = todosList.todos.map((element) => ({...element, state : (element.completed === true) ? 'COMPLETED' : 'ONGOING' }));
+
+            setFirstTodos(todos);
         }
 
         extract_todos();

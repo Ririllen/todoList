@@ -9,36 +9,41 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 
-export default function Item({id,content,completed}) {
+export default function Item({id,content,completed,stateInternal}) {
     const {setItemState} = useTodosContext();
-    const [edit, setEditable] = useState(false);
+    // const [edit, setEditable] = useState(false);
+
+    const [state, setState] = useState(stateInternal);
 
     const handleOnClickTrash = () => {
         setItemState({ id: id,  state: 'ITEM_DELETE'});
+        // setState('DELETE');
     }
 
     const handleOnClickComplete = () => {
         setItemState({ id: id,  state: 'ITEM_COMPLETED'});
+        setState('COMPLETE');
     }    
 
     const handleOnClickEdit = () => {
-        setItemState({ id: id,  state: 'ITEM_EDIT'});
-        setEditable(true);
+        // setItemState({ id: id,  state: 'ITEM_EDIT'});
+        // setEditable(true);
+        setState('EDIT');
     }
 
     return  <div className={styles.div}>
             <div className={styles.item}>
-                { (edit)? (<Editable contentExternal={content} id={id}/>) 
+                { (state === 'EDIT')? (<Editable contentExternal={content} id={id}/>) 
                         : content}
             </div>
 
             <div className={styles.icons}>
-            { (edit) ? (<button>SAve</button>): null}
+            { (state === 'EDIT') ? (<button>SAve</button>): null}
             
-            { (!completed && !edit) ? (<FontAwesomeIcon icon={faPenToSquare} onClick={handleOnClickEdit} className={styles.icon}/>) : null }
-            { (!completed && !edit) ? (<FontAwesomeIcon icon={faCheck} onClick={handleOnClickComplete} className={styles.icon}/>): null }
+            { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon icon={faPenToSquare} onClick={handleOnClickEdit} className={styles.icon}/>) : null }
+            { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon icon={faCheck} onClick={handleOnClickComplete} className={styles.icon}/>): null }
              
-            { (!edit) ? (<FontAwesomeIcon icon={faTrashCan} onClick={handleOnClickTrash} className={styles.icon}/>) : null }
+            { (state !== 'EDIT') ? (<FontAwesomeIcon icon={faTrashCan} onClick={handleOnClickTrash} className={styles.icon}/>) : null }
             
             </div> 
             </div>;

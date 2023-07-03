@@ -3,8 +3,19 @@ import Items from 'src/components/Items.js'
 import NewItem from 'src/components/NewItem'
 import { useEffect } from "react";
 
-export default function TodoList() {
+export default function TodoList({firstTodos}) {
     const { todos, setTodos, navState, itemState , setItemState} = useTodosContext();
+
+    useEffect(() => 
+      setTodos(firstTodos)
+    ,[firstTodos]);
+
+    useEffect(() => {
+        setTodos(filteredTodosCompleted);
+        console.log(itemState);
+        setItemState({ id: itemState.id,  state: ''});
+        },
+        [itemState.state]);     
 
     const addnewItem = (value) => {
 
@@ -16,15 +27,17 @@ export default function TodoList() {
         setTodos(todos);
     }
     
-    const filteredTodos = (itemState.state === 'ITEM_DELETE')? 
-                            todos.filter(todo => todo.id !== itemState.id)
-                          : todos;
-    useEffect(() => {
-        setTodos(filteredTodos);
-        setItemState({ id: 0,  state: ''});
-        },
-        [itemState.state]);
 
+
+    const filteredTodos = (itemState.state === 'ITEM_DELETE')? 
+    todos.filter(todo => todo.id !== itemState.id) : todos;
+
+    useEffect(() => {
+      setTodos(filteredTodos);
+      console.log(todos);
+      setItemState({ id: 0,  state: ''});
+      },
+      [itemState.state]);        
 
     const filteredTodosCompleted = (itemState.state === 'ITEM_COMPLETED')? 
           todos.map((todo) => { 
@@ -32,11 +45,7 @@ export default function TodoList() {
             todo.completed = (todo.id === itemState.id) ? true : valueOfCompleted ; 
                               return todo})
           : todos;
-    useEffect(() => {
-        setTodos(filteredTodosCompleted);
-        setItemState({ id: itemState.id,  state: ''});
-        },
-        [itemState.state]);    
+   
 
     return (
          ( navState === 'NEW') ? (<NewItem newItem={addnewItem}/>) : 

@@ -2,12 +2,9 @@ import { useEffect } from 'react';
 import styles from 'src/app/page.module.css';
 import { useTodosContext } from 'src/hooks/useTodosContext';
 
-export default function NavBar({firstTodos}) {
-  const { setTodos, setNavState} = useTodosContext();
+export default function NavBar() {
+  const { setNavState} = useTodosContext();
   
-  useEffect(() => 
-    setTodos(firstTodos)
-  ,[firstTodos]);
 
     const handleOnClickViewAll = () => {
       setNavState('ALL');
