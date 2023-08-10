@@ -1,15 +1,10 @@
 "use client"
-
+import { TodosProvider } from '@/hooks/useTodosContext'
 import styles from './page.module.css'
-
 import NavBar from '@/components/NavBar'
 import TodoList from '@/components/TodoList'
-import { TodosProvider } from '../hooks/useTodosContext'
-import useTodos from '@/hooks/useTodos'
 
 export default function Home() {
-  
-  const todos = useTodos();
 
   return (
     
@@ -18,7 +13,8 @@ export default function Home() {
           <h1 className={styles.h1}>To Do List</h1>
           <TodosProvider>
             <NavBar />
-            <TodoList firstTodos={todos}/> 
+            {/* <TodoList firstTodos={todos}/>  */}
+            <TodoList /> 
           </TodosProvider>
         </div>  
       </main>

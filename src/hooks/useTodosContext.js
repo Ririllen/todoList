@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
-// import useTodos from "./useTodos";
+'use client'
+// import { getToDoItemsFromLocalStorage } from "@/service/service";
+import { createContext, useContext, useEffect, useState } from "react";
 
 export const TodosContext = createContext();
 
@@ -7,17 +8,26 @@ export const TodosContext = createContext();
 export function TodosProvider(props) {
 
     const { children } = props;
-  
-    const [navState, setNavState] = useState('');
+    // const list = getToDoItemsFromLocalStorage('list'); 
+    // const [todos, setTodos] = useState([]);
+
+    // useEffect(()=>{
+    //   setTodos(list);
+    // }
+    //   ,[]);
+    
+
+    // console.log(todos,"Provider");
+
+    const [navState, setNavState] = useState('ALL');
     const [itemState, setItemState] = useState('');
-    const [todos, setTodos] = useState([]);
 
         
     return (
       <TodosContext.Provider
         value={{
-          todos , 
-          setTodos,
+          // todos , 
+          // setTodos,
           navState,
           setNavState,
           itemState, 

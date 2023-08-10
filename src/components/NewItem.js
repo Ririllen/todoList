@@ -15,7 +15,7 @@ export default function NewItem({newItem}) {
 
     const handleSubmit = (event) => {
       event.preventDefault();  //prevents page refresh
-      const itemObj = {id: 0, todo: item, completed: false };
+      const itemObj = {id: 0, todo: item, state: 'NEW', completed: false };
       newItem(itemObj);  
       setItem('');    
     }    

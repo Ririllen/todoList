@@ -14,6 +14,14 @@ export default function useTodos() {
         }
 
         extract_todos();
+
+        
+        //  get data from localStorage
+        // const items = JSON.parse(localStorage.getItem('items'));
+        // if (items) {
+        //  setFirstTodos(items);
+        // }
+
         }
     ,[]);
         
