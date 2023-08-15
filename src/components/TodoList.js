@@ -57,9 +57,11 @@ import { saveTodoItemsToLocalStorage } from 'src/service/service.js';
       setItemState({ id: itemState.id,  state: ''});
     }
 
+    console.log(todos);  
+
     return ( 
          ( navState == 'NEW') ? (<NewItem newItem={addnewItem}/>) : 
-         (navState == 'ALL') ? (<Items todos={todos}/>) : 
+         (navState == 'ALL') ? (<Items setTodos={setTodos} todos={todos}/>) : 
          (navState == 'COMPLETED' ) ? (<Items todos={ todos ? todos.filter(todo => todo.completed === true) : null } />) : 
          (navState == 'ONGOING' ) ? (<Items todos={ todos ? todos.filter(todo => todo.completed === false): null }/>) : null 
     );

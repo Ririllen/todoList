@@ -6,7 +6,7 @@ import styles from './editable.module.css';
 export default function Editable({contentExternal,id}) {
 	const [content, setContent] = useState("");
 
-	useEffect(() => setContent(contentExternal+id),[]);
+	useEffect(() => setContent(contentExternal),[]);
 
 	const onContentChange = useCallback(evt => {
 		const sanitizeConf = {
