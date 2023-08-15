@@ -9,9 +9,10 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 
-export default function Item({dragStart, dragEnter, drop, index,id,content,completed,stateInternal}) {
+export default function Item({saveValue, dragStart, dragEnter, drop, index,id,content,completed,stateInternal}) {
     const {setItemState} = useTodosContext();
     // const [edit, setEditable] = useState(false);
+    const [contentE , setContentE ] = useState(content);
 
     const [state, setState] = useState(stateInternal);
 
@@ -31,7 +32,10 @@ export default function Item({dragStart, dragEnter, drop, index,id,content,compl
         setState('EDIT');
     }
 
-    console.log(content);
+    const handleClickSave = () => {
+        saveValue(contentE,id);
+        setState('NEW');
+    }
 
     return  <div className={styles.div}
             draggable
@@ -40,12 +44,12 @@ export default function Item({dragStart, dragEnter, drop, index,id,content,compl
             onDragEnd={drop}
             >
                 <div className={styles.item}>
-                    { (state === 'EDIT')? (<Editable contentExternal={content} id={id}/>) 
-                            : content}
+                    { (state === 'EDIT')? (<Editable setContentE={setContentE} contentExternal={contentE} id={id}/>) 
+                            : contentE}       
                 </div>
 
                 <div className={styles.icons}>
-                { (state === 'EDIT') ? (<button>save</button>): null}
+                { (state === 'EDIT') ? (<button onClick={handleClickSave}>save</button>): null}
                 
                 { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon icon={faPenToSquare} onClick={handleOnClickEdit} className={styles.icon}/>) : null }
                 { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon icon={faCheck} onClick={handleOnClickComplete} className={styles.icon}/>): null }

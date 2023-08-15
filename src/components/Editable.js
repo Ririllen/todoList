@@ -3,10 +3,10 @@ import ContentEditable from 'react-contenteditable';
 import { useState , useCallback, useEffect} from "react";
 import styles from './editable.module.css';
 
-export default function Editable({contentExternal,id}) {
-	const [content, setContent] = useState("");
+export default function Editable({setContentE,contentExternal}) {
+	// const [content, setContent] = useState(contentExternal);
 
-	useEffect(() => setContent(contentExternal),[]);
+	// useEffect(() => setContent(contentExternal),[]);
 
 	const onContentChange = useCallback(evt => {
 		const sanitizeConf = {
@@ -14,14 +14,14 @@ export default function Editable({contentExternal,id}) {
 			allowedAttributes: { a: ["href"] }
 		};
 		// evt.currentTarget.innerHTML
-		setContent(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf))
+		setContentE(sanitizeHtml(evt.currentTarget.innerHTML, sanitizeConf));
 	}, [])
 
 	return (
 		<ContentEditable className={styles.textEditor}
 			onChange={onContentChange}
 			onBlur={onContentChange}
-			html={content}
+			html={contentExternal}
 		/>
 	)
 }

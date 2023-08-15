@@ -34,10 +34,22 @@ export default function Items({todos, setTodos}) {
             saveTodoItemsToLocalStorage('list',copyListItems);
         };
       };
+
+    const saveValue = (contentE, id) => {
+        if (setTodos) {
+            console.log(contentE, "and id" , id);
+            const searchIndex = todos.findIndex((todo) => todo.id==id);
+            todos[searchIndex].todo = contentE;
+            setTodos(todos);
+            saveTodoItemsToLocalStorage('list',todos);
+            console.log(todos);
+        }
+    }  
     
     return ( <>
         {todos && todos.map( (todo,index) => 
             <Item 
+            saveValue={saveValue}
             dragStart={dragStart} 
             dragEnter={dragEnter}
             drop={drop}
