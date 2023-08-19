@@ -20,7 +20,7 @@ export function TodosProvider(props) {
     // console.log(todos,"Provider");
 
     const [navState, setNavState] = useState('ALL');
-    const [itemState, setItemState] = useState('');
+    const [itemState, setItemState] = useState({ id: 0,  state: ''});
 
         
     return (

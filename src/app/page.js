@@ -15,6 +15,19 @@ export default function Home() {
             <NavBar />
             {/* <TodoList firstTodos={todos}/>  */}
             <TodoList /> 
+            
+            {/* <nav className={styles.pagination_container}>
+              <button className={styles.pagination_button} id="prev-button" title="Previous page" aria-label="Previous page">
+                &lt;
+              </button>
+              
+              <div id="pagination-numbers">
+              </div>
+              
+              <button className={styles.pagination_button} id="next-button" title="Next page" aria-label="Next page">
+                &gt;
+              </button>
+            </nav>             */}
           </TodosProvider>
         </div>  
       </main>

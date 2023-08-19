@@ -1,6 +1,6 @@
 import styles from './item.module.css'
 import { useTodosContext } from '@/hooks/useTodosContext';
-import Editable from '@/components/Editable'
+import Editable from '@/components/Editable';
 
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,10 +9,14 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 
-export default function Item({saveValue, dragStart, dragEnter, drop, index,id,content,completed,stateInternal}) {
+
+export default function Item({saveValue, dragStart, dragEnter, drop, 
+                              index,id,content,completed,stateInternal}) {
+
     const {setItemState} = useTodosContext();
     // const [edit, setEditable] = useState(false);
     const [contentE , setContentE ] = useState(content);
+    // const [current, setCurrent] = useState(content);
 
     const [state, setState] = useState(stateInternal);
 
@@ -29,13 +33,17 @@ export default function Item({saveValue, dragStart, dragEnter, drop, index,id,co
     const handleOnClickEdit = () => {
         // setItemState({ id: id,  state: 'ITEM_EDIT'});
         // setEditable(true);
+        setContentE(content);
         setState('EDIT');
     }
 
     const handleClickSave = () => {
         saveValue(contentE,id);
+        setContentE(contentE);
         setState('NEW');
     }
+
+    // console.log(current);
 
     return  <div className={styles.div}
             draggable
@@ -45,16 +53,16 @@ export default function Item({saveValue, dragStart, dragEnter, drop, index,id,co
             >
                 <div className={styles.item}>
                     { (state === 'EDIT')? (<Editable setContentE={setContentE} contentExternal={contentE} id={id}/>) 
-                            : contentE}       
+                            : content}       
                 </div>
 
                 <div className={styles.icons}>
                 { (state === 'EDIT') ? (<button onClick={handleClickSave}>save</button>): null}
                 
-                { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon icon={faPenToSquare} onClick={handleOnClickEdit} className={styles.icon}/>) : null }
-                { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon icon={faCheck} onClick={handleOnClickComplete} className={styles.icon}/>): null }
+                { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon title={"edit"} icon={faPenToSquare} onClick={handleOnClickEdit} className={styles.icon}/>) : null }
+                { (!completed && (state !== 'EDIT') ) ? (<FontAwesomeIcon title={"complete"} icon={faCheck} onClick={handleOnClickComplete} className={styles.icon}/>): null }
                 
-                { (state !== 'EDIT') ? (<FontAwesomeIcon icon={faTrashCan} onClick={handleOnClickTrash} className={styles.icon}/>) : null }
+                { (state !== 'EDIT') ? (<FontAwesomeIcon title={"delete"} icon={faTrashCan} onClick={handleOnClickTrash} className={styles.icon}/>) : null }
                 
                 </div> 
             </div>;

@@ -20,6 +20,8 @@ import { saveTodoItemsToLocalStorage } from 'src/service/service.js';
           
               if (Array.isArray(storageValueJSON)) {
                   setTodos(storageValueJSON); 
+
+                  console.log("data from storage");
               }
           } catch(e) {
               console.log(e);
@@ -35,7 +37,7 @@ import { saveTodoItemsToLocalStorage } from 'src/service/service.js';
         value.id = maxId + 1;} else value.id = 1;
     
         todos.push(value);
-        setTodos(todos);
+        // setTodos(todos);
 
         saveTodoItemsToLocalStorage('list',todos);    
 
@@ -57,7 +59,7 @@ import { saveTodoItemsToLocalStorage } from 'src/service/service.js';
       setItemState({ id: itemState.id,  state: ''});
     }
 
-    console.log(todos);  
+    console.log(todos, "from TodoList");  
 
     return ( 
          ( navState == 'NEW') ? (<NewItem newItem={addnewItem}/>) : 
