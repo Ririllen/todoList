@@ -13,7 +13,7 @@ import { useState } from 'react';
 export default function Item({saveValue, dragStart, dragEnter, drop, 
                               index,id,content,completed,stateInternal}) {
 
-    const {setItemState} = useTodosContext();
+    const {setItemState, curr, prev} = useTodosContext();
     // const [edit, setEditable] = useState(false);
     const [contentE , setContentE ] = useState(content);
     // const [current, setCurrent] = useState(content);
@@ -43,9 +43,10 @@ export default function Item({saveValue, dragStart, dragEnter, drop,
         setState('NEW');
     }
 
-    // console.log(current);
+    const hide = (index >= prev && index < curr) ? {display: ""} : {display: "none"};
 
     return  <div className={styles.div}
+            style={hide}
             draggable
             onDragStart={(e) => dragStart(e, index)} 
             onDragEnter={(e) => dragEnter(e, index)}

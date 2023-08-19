@@ -7,7 +7,7 @@ import { saveTodoItemsToLocalStorage } from 'src/service/service.js';
 
 
   export default function TodoList() {
-    const { navState, itemState , setItemState} = useTodosContext();
+    const { navState, itemState , setItemState, setNrTodos} = useTodosContext();
     const [todos, setTodos] = useState([]);
 
     useEffect(
@@ -20,6 +20,7 @@ import { saveTodoItemsToLocalStorage } from 'src/service/service.js';
           
               if (Array.isArray(storageValueJSON)) {
                   setTodos(storageValueJSON); 
+                  setNrTodos(storageValueJSON.length);
 
                   console.log("data from storage");
               }

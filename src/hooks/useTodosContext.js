@@ -15,19 +15,23 @@ export function TodosProvider(props) {
     //   setTodos(list);
     // }
     //   ,[]);
-    
-
-    // console.log(todos,"Provider");
 
     const [navState, setNavState] = useState('ALL');
     const [itemState, setItemState] = useState({ id: 0,  state: ''});
+    const [nrTodos, setNrTodos] = useState(0);
+    const [prev, setPrev] = useState(0);
+    const [curr, setCurr] = useState(0);
 
         
     return (
       <TodosContext.Provider
         value={{
-          // todos , 
-          // setTodos,
+          curr,
+          prev,
+          setPrev,
+          setCurr,
+          nrTodos , 
+          setNrTodos,
           navState,
           setNavState,
           itemState, 
